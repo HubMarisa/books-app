@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import axios from 'axios';
+import { getBookById } from "../../../api/booksApi";
 import parse from 'html-react-parser';
 
 function BookDetails({ bookId }) {
@@ -8,8 +8,7 @@ function BookDetails({ bookId }) {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        axios
-            .get(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
+        getBookById(bookId)
             .then((response) => {
                 setBook(response.data);
                 setError(false);
