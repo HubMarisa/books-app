@@ -1,4 +1,11 @@
+import { useState } from "react";
+
 function SearchBar({setSearch}) {
+    const [searchValue, setSearchValue] = useState('');
+
+    const handleSearch = () => {
+        setSearch(searchValue);
+    }
 
     return (
         <div className="search">
@@ -6,8 +13,9 @@ function SearchBar({setSearch}) {
                 type="text" 
                 placeholder="Search Books..."
                 onChange={(event) => 
-                    setSearch(event.target.value)}
-            />    
+                    setSearchValue(event.target.value)}
+            /> 
+            <button onClick={handleSearch}>Search</button>   
         </div>
     );
 }
