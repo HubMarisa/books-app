@@ -12,11 +12,12 @@ import { useContext } from 'react';
 <ThemeToggler /> */}
 
 function Header() {
-    const {search, setSearch} = useContext(SearchContext);
+    const {search, setSearch, setFilters} = useContext(SearchContext);
     const navigate = useNavigate();
 
     const handleSearch = (newSearch) => {
         setSearch(newSearch);
+        setFilters({});
         navigate('/');
     }
 

@@ -2,9 +2,10 @@ import React, {useContext, useEffect, useMemo, useState} from "react";
 import { getBooksBySearchTerm } from "../../api/booksApi";
 import { Link } from "react-router-dom";
 import { SearchContext } from "../../context";
+import FilterBar from "../FilterBar/FilterBar";
 
 function BooksList () {
-    const { search } = useContext(SearchContext);
+    const { search, filters } = useContext(SearchContext);
     const [books, setBooks] = useState([]);
     const [currentPage, setcurrentPage] = useState(1);
     const booksPerPage = 10;
@@ -15,7 +16,7 @@ function BooksList () {
 
     useEffect(() => {
         if(search) {
-            getBooksBySearchTerm(search, currentPage, booksPerPage)
+            getBooksBySearchTerm(search, currentPage, booksPerPage, filters)
             .then((response) => {
                 if(response.data.items) {
                     setBooks(response.data.items);
@@ -25,7 +26,7 @@ function BooksList () {
             })
             .catch((error) => console.error(error));
         }
-    },[search, currentPage]);
+    },[search, currentPage, filters]);
 
     const memoizedBooks = useMemo(() => 
         books.map((book, index) => (
@@ -41,13 +42,16 @@ function BooksList () {
     return (
         <div className="books">
             <div className="container">
-                <h1>Books</h1>
-                <h5>Current page: {currentPage}</h5>
+                {search && books.length > 0 && <h1>Books</h1>}           
+            
+
+                {search && <FilterBar />}
 
                 <ul>{memoizedBooks}</ul>
                 {search && books.length > 0 && (
                     <>
                         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                            <span> Current page: {currentPage} </span>     
                         <button onClick={() => handlePageChange(currentPage + 1)}>Next</button>
                     </>
                 )}
