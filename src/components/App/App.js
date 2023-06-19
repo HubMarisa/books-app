@@ -10,6 +10,7 @@ import BookDetails from '../BooksList/BookDetails/BookDetails';
 import NotFound from '../NotFound/NotFound';
 import { ThemeContext, SearchContext } from '../../context';
 import Header from '../Header/Header';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Router>
           <div className="app">
             <Header setSearch={setSearch} />
+            <Breadcrumbs />
 
             <Routes>
               <Route path='/' element={<BooksList />}></Route>
