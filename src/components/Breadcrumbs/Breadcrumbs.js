@@ -16,16 +16,16 @@ function Breadcrumbs() {
                 const to = `/${pathnames.slice(0, index + 1).join('/')}`;
 
                 return isLast ? (
-                    <span key={to}> / {value} </span>                    
+                    <span key={to}> | {value} </span>                    
                 ) : (
                     <>
-                        <span> / </span>
+                        <span> | </span>
                         <Link key={to} to={to}>
                             {value}
                         </Link>
                     </>
                 );
-            })};
+            })}
         </div>
     )
 }
