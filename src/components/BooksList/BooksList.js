@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useMemo, useState} from "react";
+import React, {useContext, useEffect, useMemo, useState, useCallback} from "react";
 import { getBooksBySearchTerm } from "../../api/booksApi";
 import { Link } from "react-router-dom";
 import { SearchContext } from "../../context";
@@ -10,9 +10,9 @@ function BooksList () {
     const [currentPage, setcurrentPage] = useState(1);
     const booksPerPage = 10;
     
-    const handlePageChange = (pageNumber) => {
+    const handlePageChange = useCallback((pageNumber) => {
         setcurrentPage(pageNumber);
-    }
+    }, []);
 
     useEffect(() => {
         if(search) {
