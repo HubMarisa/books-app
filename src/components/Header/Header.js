@@ -30,6 +30,7 @@ function Header() {
                     <SearchBar setSearch={handleSearch} />
 
                     <Link to="/about">About</Link>
+                    <Link to="/contact">Contact us</Link>
 
                     <ThemeToggler />
                 </nav>

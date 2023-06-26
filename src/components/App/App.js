@@ -5,6 +5,7 @@ import React, {useState, useEffect, useRef} from 'react';
 
 import About from '../About/About';
 import BooksList from '../BooksList/BooksList';
+import ContactUs from '../ContactUs/ContactUs';
 
 import BookDetails from '../BooksList/BookDetails/BookDetails';
 import NotFound from '../NotFound/NotFound';
@@ -30,6 +31,7 @@ function RoutesWithHistory() {
       <Route path='/book/:slug' element={<BookDetails />}></Route>
 
       <Route path='/about' element={<About />}></Route>
+      <Route path='/contact' element={<ContactUs />}></Route>
 
       <Route path='*' element={<Navigate to="/404" />} />
       <Route path="/404" element={<NotFound />} />
