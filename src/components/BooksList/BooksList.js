@@ -3,6 +3,7 @@ import { getBooksBySearchTerm } from "../../api/booksApi";
 import { Link } from "react-router-dom";
 import { SearchContext } from "../../context";
 import FilterBar from "../FilterBar/FilterBar";
+import slugify from "slugify";
 
 function BooksList () {
     const { search, filters } = useContext(SearchContext);
@@ -29,13 +30,19 @@ function BooksList () {
     },[search, currentPage, filters]);
 
     const memoizedBooks = useMemo(() => 
-        books.map((book, index) => (
+        books.map((book, index) => {
+            const slug = `${book.id}-${slugify(book.volumeInfo.title, {
+                lower: true, strick: true
+        })}`;
+
+            return (
             <li key={index}>
-                <Link to={`/book/${book.id}`} title={book.volumeInfo.title}>
+                <Link to={`/book/${slug}`} title={book.volumeInfo.title}>
                     {book.volumeInfo.title}
                 </Link>
             </li>
-        )),
+            )
+        }),
         [books]
     );
 
